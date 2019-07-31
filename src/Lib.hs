@@ -2,7 +2,8 @@ module Lib
     ( someFunc,
       toDigits,
       doubleEveryOther,
-      sumDigits
+      sumDigits,
+      validate
     ) where
 
 someFunc :: IO ()
@@ -26,4 +27,6 @@ doubleEveryOther (x:n:ns) = x:(n * 2) : (doubleEveryOther ns)
 
 sumDigits :: [Int] -> Int
 sumDigits xs = sum (toDigits (read (join xs) :: Int))
+
+validate :: Int -> Bool
 
