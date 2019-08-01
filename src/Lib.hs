@@ -2,8 +2,7 @@ module Lib
     ( someFunc,
       toDigits,
       doubleEveryOther,
-      sumDigits,
-      validate
+      sumDigits
     ) where
 
 someFunc :: IO ()
@@ -20,13 +19,18 @@ toDigitsRev n = reverse (toDigits n)
 join :: [Int] -> String
 join xs = foldr (\a b -> (show a) ++ b) "" xs
 
+doubleInList :: [Int] -> [Int]
+doubleInList [] = []
+doubleInList [x] = [x]
+doubleInList (x:n:ns) = x:(n * 2) : (doubleInList ns)
+
 doubleEveryOther :: [Int] -> [Int]
 doubleEveryOther [] = []
 doubleEveryOther [x] = [x]
-doubleEveryOther (x:n:ns) = x:(n * 2) : (doubleEveryOther ns)
+doubleEveryOther xs = reverse (doubleInList (reverse xs))
 
 sumDigits :: [Int] -> Int
 sumDigits xs = sum (toDigits (read (join xs) :: Int))
 
-validate :: Int -> Bool
+-- validate :: Int -> Bool
 
