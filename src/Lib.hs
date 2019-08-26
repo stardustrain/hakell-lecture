@@ -17,12 +17,12 @@ toDigits n = if n < 0
 toDigitsRev n = reverse (toDigits n)
 
 join :: [Int] -> String
-join xs = foldr (\a b -> (show a) ++ b) "" xs
+join = foldr (\a b -> show a ++ b) ""
 
 doubleInList :: [Int] -> [Int]
 doubleInList [] = []
 doubleInList [x] = [x]
-doubleInList (x:n:ns) = x:(n * 2) : (doubleInList ns)
+doubleInList (x:n:ns) = x:(n * 2) : doubleInList ns
 
 doubleEveryOther :: [Int] -> [Int]
 doubleEveryOther [] = []

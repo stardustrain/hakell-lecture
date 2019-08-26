@@ -1,6 +1,7 @@
 module Main where
 
 import Lib
+import A
 
 main :: IO ()
-main = print (doubleEveryOther [2, 3, 4, 5, 6])
+main = print (groupWord "wa wee wa wa wa wee we")
