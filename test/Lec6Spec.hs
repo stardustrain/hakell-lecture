@@ -7,7 +7,7 @@ import Lec6
 spec :: Spec
 spec = do
   describe "Caesar cipher" $ do
-    it "encode text message" $ 
+    it "encode text message" $
       encode 3 "hey mark" `shouldBe` "kh|#pdun"
     it "decode text message" $
       decode 3 "kh|#pdun" `shouldBe` "hey mark"
@@ -18,7 +18,7 @@ spec = do
     it "findByKey return value if exist valid key" $ do
       findByKey "aa" [("aa", "bb"), ("cc", "dd")] `shouldBe` Just "bb"
       findByKey "cc" [("aa", "bb"), ("cc", "dd")] `shouldBe` Just "dd"
-    it "findByKey return Nothing if dose not valid key" $ 
+    it "findByKey return Nothing if dose not valid key" $
       findByKey "ee" [("aa", "bb"), ("cc", "dd")] `shouldBe` Nothing
   describe "Insert value with key" $ do
     it "insertKeyByValue has insert value with key and return new Map" $
