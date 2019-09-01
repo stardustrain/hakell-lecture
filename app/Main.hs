@@ -1,7 +1,7 @@
 module Main where
 
 import Lib
-import A
+import Lec6
 
 main :: IO ()
-main = print (groupWord "wa wee wa wa wa wee we")
+main = print (findByKey "aa" [("aa", "bb"), ("cc", "dd")])
