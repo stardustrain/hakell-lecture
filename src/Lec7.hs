@@ -79,6 +79,7 @@ data Person = Person { firstName :: String
 --               ,height=184.5
 --               ,phoneNumber="555-5555"
 --             }
+-- :t firstName :: Person -> String
 -- firstName guy
 -- "test"
 
