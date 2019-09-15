@@ -36,3 +36,12 @@ spec = do
                         ,phoneNumber="555-5555"
                       }
       in tellPerson guy `shouldBe` "J Kim has 25 years old."
+  describe "Day" $ do
+    it "return min or max day" $ do
+      (minBound :: Day) `shouldBe` Mon
+      (maxBound :: Day) `shouldBe` Sun
+    it "return next or previous day" $ do
+      succ Mon `shouldBe` Tue
+      pred Sat `shouldBe` Fri
+    it "return array from Day enum" $
+      ([minBound .. maxBound] :: [Day]) `shouldBe` [Mon, Tue, Wed, Thur, Fri, Sat, Sun]

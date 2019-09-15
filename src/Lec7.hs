@@ -2,18 +2,24 @@ module Lec7 (
   Shape(..),
   Point(..),
   Person(..),
+  Day(..),
   area,
   mapToRadius,
   baseRect,
   nudge,
-  tellPerson
+  tellPerson,
+  lockerLookup
 ) where
 
 import Text.Printf (printf)
+import qualified Data.Map as Map
 
 -- 새로운 데이터 타입을 정의할 때는 data keyword를 사용한다.
 -- data Shape = Circle Float Float Float | Rect Float Float Float Float
 --   deriving (Show)
+-- Type 동의어 (type synonym)을 정의할 때는 type keyword를 사용한다.
+-- type String = [Char]
+
 -- Circle, Rect와 같은 '값 생성자'는 실제로 데이터 타입을 반환하는 '함수'다.
 -- :t Circle :: Float -> Float -> Float -> Shape
 
@@ -84,5 +90,29 @@ data Person = Person { firstName :: String
 -- "test"
 
 tellPerson :: Person -> String
-tellPerson Person{firstName = f, lastName = l, age = a} =
+tellPerson Person {firstName = f, lastName = l, age = a} =
   printf "%s %s has %d years old." f l a
+
+-- Day type은 Eq, Bounded, Enum등의 타입클래스에 속하기 때문에 여러가지 연산이 가능하다.
+-- "상속"의 느낌으로 알고있으면 좋을 것 같다.
+data Day = Mon | Tue | Wed | Thur | Fri | Sat | Sun
+          deriving (Eq, Show, Read, Bounded, Enum)
+-- (minBound :: Day) `shouldBe` Mon > Bounded 타입 클래스의 기능
+-- succ Mon `shouldBe` Tue > Enum, Eq 타입 클래스의 기능
+-- ([minBound .. maxBound] :: [Day]) `shouldBe` [Mon, Tue, Wed, Thur, Fri, Sat, Sun] > Enum 타입 클래스의 기능
+
+-- Either a b = Left a | Right b
+-- Nothing 같은 Maybe type으로 실패에 대한 이유를 기술해야할 때 사용한다.
+-- 실패는 Left, 성공은 Right type에 기술해야한다.
+
+data LockerState = Taken | Free deriving (Show, Eq)
+type LockerMap = Map.Map Int (LockerState, String)
+type Err = String
+
+lockerLookup :: Int -> LockerMap -> Either Err String
+lockerLookup lockerNumber map = case Map.lookup lockerNumber map of
+  Nothing -> Left "not exist"
+  Just (state, code) -> if state /= Taken
+                          then Right code
+                          else Left "already taken"
+
