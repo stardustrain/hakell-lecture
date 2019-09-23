@@ -1,8 +1,13 @@
 module Main where
 
-import Lib
-import Lec6
-import Lec7
+import Data.Char (toUpper)
+import Lib (reverseWords)
 
 main :: IO ()
-main = print (nudge (baseRect 10 20) 20 30)
+main = do
+  line <- getLine
+  if null line
+    then return ()
+    else do
+      print $ reverseWords line
+      main

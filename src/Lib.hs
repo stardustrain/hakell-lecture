@@ -2,7 +2,8 @@ module Lib
     ( someFunc,
       toDigits,
       doubleEveryOther,
-      sumDigits
+      sumDigits,
+      reverseWords
     ) where
 
 someFunc :: IO ()
@@ -34,3 +35,5 @@ sumDigits xs = sum (toDigits (read (join xs) :: Int))
 
 -- validate :: Int -> Bool
 
+reverseWords :: String -> String
+reverseWords = unwords . map reverse . words
